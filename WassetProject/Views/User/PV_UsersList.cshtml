@@ -1,0 +1,194 @@
+﻿@model List<WassetPortal_DAL.Models.User>
+<!-- base:css -->
+<link rel="stylesheet" href="~/wwwroot/vendors/typicons/typicons.css">
+<link rel="stylesheet" href="~/wwwroot/vendors/css/vendor.bundle.base.css">
+<!-- endinject -->
+<!-- inject:css -->
+
+<link href="~/wwwroot/css/vertical-layout-light/style.css" rel="stylesheet" />
+<!-- endinject -->
+<link rel="shortcut icon" href="~/wwwroot/images/favicon.png" />
+
+<button class="btn btn-primary mb-2 mt-2" onclick="window.location.href = '/user/createUser'">Create User</button>
+
+<div class="col-lg-12 grid-margin stretch-card pl-0 pr-0">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">users</h4>
+            <p class="card-description">
+              
+            </p>
+            <div @*class="table-responsive"*@>
+                <div class="table-responsive">
+                    <table id="table_id" class="table zero-configuration table-striped">
+                        <thead>
+                            <tr>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @*<table class="table zero-configuration dtable table-striped ">
+            <thead>
+                <tr class="text-center">
+                    <th>test</th>
+                </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                  <td>Value</td>
+              </tr>
+            </tbody>
+        </table>*@
+                </div>
+                @*<table class="table table-bordered CustomDataTable">
+            <thead>
+                <tr>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        User code
+                    </th>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                        Mobile number
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        User Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                                        <tr>
+                                            <td class="py-1">
+                                                <img src="~/wwwroot/images/faces/face1.jpg" alt="image" />
+                                            </td>
+                                            <td>
+                                                @item.UserCode
+                                            </td>
+                                            <td>
+                                                @item.UserName
+                                            </td>
+                                            <td>
+                                                @item.Mobile
+                                            </td>
+                                            <td>
+                                                @item.Email
+                                            </td>
+
+                                      @{ if (item.UserStatus == true)
+                                          {
+                                             <td>
+                                                <label class="badge badge-success">Completed</label>
+                                             </td>
+                                           }
+                                         else
+                                          {
+                                             <td>
+                                                 <label class="badge badge-danger">Pending</label>
+                                             </td>
+                                           }
+                                          }
+                                            <td>
+
+                                            </td>
+
+                                        </tr>
+                        }
+                    }
+                }
+                                                                                                                                         </tbody>
+        </table>*@
+            </div>
+        </div>
+    </div>
+</div>
+

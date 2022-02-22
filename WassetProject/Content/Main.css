@@ -1,0 +1,44 @@
+﻿body {
+}
+.SubMainTabs .list-group-item {
+    display: inline-block;
+    width: 20%;
+}
+.SubMainTabs .list-group {
+    display: flex;
+    flex-direction: unset;
+}
+.LoginBg {
+    background-color: #fff;
+    /* background-image: url('pexels-artem-podrez-5726835.jpg');*/
+    /*background-image: url('pexels-rfstudio-3825368.jpg');*/
+    /*background-image: url('imgs/pexels-kampus-production-8949865.jpg');*/
+    /* background-image: url('imgs/pexels-chokniti-khongchum-3082452.jpg');*/
+    background-image: url('imgs/pexels-chokniti-khongchum-2280571.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.auth .auth-form-light {
+    background: #ffffff;
+    position: relative;
+    opacity: 0.8;
+    z-index: 1022;
+}
+.LoginBg::after {
+    content: "";
+    position: absolute;
+    display: block;
+    color: #000;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    width: 100%;
+    height: 117.5%;
+    top: 0;
+    z-index: 1020;
+}
+.LoginBg .auth .auth-form-light {
+    background: #ffffff;
+    opacity: 0.9;
+}
+

@@ -133,20 +133,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\TestsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SqlCommandHelper.cs" />
-    <Compile Include="Models\ActionsVM.cs" />
-    <Compile Include="Models\RolesVM.cs" />
-    <Compile Include="Models\UserActionVM.cs" />
-    <Compile Include="Models\UserRoleVM.cs" />
-    <Compile Include="Models\ViewModels\LoginVM.cs" />
-    <Compile Include="Models\ViewModels\RegisterOrgViewModel.cs" />
-    <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1926,8 +1922,6 @@
     <Content Include="Views\User\PV_CreateAction.cshtml" />
     <Content Include="Views\User\PV_CreateRole.cshtml" />
     <Content Include="Views\User\RolesIndex.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Home\TestDatatable.cshtml" />
     <Content Include="wwwroot\assets\css\bootstrap.min.css.map" />
     <Content Include="wwwroot\assets\fonts\boxicons.eot" />
@@ -1959,6 +1953,31 @@
     <Content Include="wwwroot\assets\plugins\notifications\sounds\sound4.ogg" />
     <Content Include="wwwroot\assets\plugins\notifications\sounds\sound5.ogg" />
     <Content Include="wwwroot\assets\plugins\notifications\sounds\sound6.ogg" />
+    <Content Include="Views\Hospitals\Create.cshtml" />
+    <Content Include="Views\Hospitals\Delete.cshtml" />
+    <Content Include="Views\Hospitals\Details.cshtml" />
+    <Content Include="Views\Hospitals\Edit.cshtml" />
+    <Content Include="Views\Hospitals\Index.cshtml" />
+    <Content Include="Views\Tests\Create.cshtml" />
+    <Content Include="Views\Tests\Delete.cshtml" />
+    <Content Include="Views\Tests\Details.cshtml" />
+    <Content Include="Views\Tests\Edit.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Views\Patients\Create.cshtml" />
+    <Content Include="Views\Patients\Delete.cshtml" />
+    <Content Include="Views\Patients\Details.cshtml" />
+    <Content Include="Views\Patients\Edit.cshtml" />
+    <Content Include="Views\Patients\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
     <None Include="wwwroot\projectContent\Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="wwwroot\projectContent\Scripts\jquery-3.4.1.js" />
     <Content Include="wwwroot\projectContent\Scripts\jquery-3.4.1.min.js" />
@@ -2846,6 +2865,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

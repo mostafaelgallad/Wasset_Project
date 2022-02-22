@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    @RenderBody()
+   
     <!--wrapper-->
     <div class="wrapper">
         <!--sidebar wrapper -->
@@ -934,7 +934,7 @@
         <div class="page-wrapper">
             <div class="page-content">
 
-                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+                <!--<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
                     <div class="col">
                         <div class="card radius-10 overflow-hidden">
                             <div class="card-body">
@@ -999,10 +999,10 @@
                             <div class="" id="chart4"></div>
                         </div>
                     </div>
-                </div><!--end row-->
+                </div>--><!--end row-->
 
 
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-12 col-xl-8 d-flex">
                         <div class="card radius-10 w-100">
                             <div class="card-body">
@@ -1034,10 +1034,10 @@
                             </div>
                         </div>
                     </div>
-                </div><!--end row-->
+                </div>--><!--end row-->
 
 
-                <div class="row row-cols-1 row-cols-xl-2">
+                <!--<div class="row row-cols-1 row-cols-xl-2">
                     <div class="col d-flex">
                         <div class="card radius-10 w-100">
                             <div class="card-body">
@@ -1060,9 +1060,9 @@
                             </div>
                         </div>
                     </div>
-                </div><!--end row-->
+                </div>--><!--end row-->
 
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-12 col-xl-4 col-xxl-3 d-flex">
                         <div class="card radius-10 w-100 overflow-hidden">
                             <div class="card-body">
@@ -1115,9 +1115,9 @@
                             </div>
                         </div>
                     </div>
-                </div><!--end row-->
+                </div>--><!--end row-->
 
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-12 col-xl-4 d-flex">
                         <div class="card radius-10 w-100">
                             <div class="card-body">
@@ -1506,10 +1506,10 @@
                             </div>
                         </div>
                     </div>
-                </div><!--end row-->
+                </div>--><!--end row-->
 
 
-                <div class="row">
+                <!--<div class="row">
                     <div class="col">
                         <div class="card radius-10 mb-0">
                             <div class="card-body">
@@ -1696,8 +1696,8 @@
                             </div>
                         </div>
                     </div>
-                </div><!--end row-->
-
+                </div>--><!--end row-->
+                @RenderBody()
             </div>
         </div>
         <!--end page wrapper -->
@@ -1832,11 +1832,13 @@
 
     <!--app JS-->
     <script src="~/wwwroot/assets/js/app.js"></script>
+
     <script>
         new PerfectScrollbar('.customers-list');
         new PerfectScrollbar('.store-metrics');
         new PerfectScrollbar('.product-list');
     </script>
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

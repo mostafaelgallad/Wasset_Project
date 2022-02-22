@@ -53,3 +53,17 @@ E:\Latest\WassetProject-main\WassetProject-main\WassetPortal_DAL\obj\Debug\Wasse
 E:\Latest\WassetProject-main\WassetProject-main\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.dll
 E:\Latest\WassetProject-main\WassetProject-main\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.pdb
 E:\Latest\WassetProject-main\WassetProject-main\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csprojAssemblyReference.cache
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.dll.config
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.dll
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.pdb
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\EntityFramework.dll
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\Newtonsoft.Json.dll
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\EntityFramework.xml
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\bin\Debug\Newtonsoft.Json.xml
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.AssemblyReference.cache
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CoreCompileInputs.cache
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CopyComplete
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.dll
+G:\work\Projects\wassetFinal\Wasset_Project\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.pdb

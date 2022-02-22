@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WassetPortal_DAL.Models.Test>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TestNameEn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TestNameAr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TestPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TestCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Test_status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestNameEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestNameAr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Test_status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TestID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TestID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TestID })
+        </td>
+    </tr>
+}
+
+</table>

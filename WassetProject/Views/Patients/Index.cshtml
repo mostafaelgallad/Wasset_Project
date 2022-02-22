@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WassetPortal_DAL.Models.Patient>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PASSPORT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_IQAMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NATIONALITY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOBILE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HESN_NO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_Case)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hospital.HospitalNameAr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hospitals_Packages.Hospitals_PackagesID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleResult.SampleResultName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleStatu.SampleStatusName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PASSPORT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_IQAMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NATIONALITY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOBILE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HESN_NO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Case)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hospital.HospitalNameAr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hospitals_Packages.Hospitals_PackagesID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleResult.SampleResultName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleStatu.SampleStatusName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

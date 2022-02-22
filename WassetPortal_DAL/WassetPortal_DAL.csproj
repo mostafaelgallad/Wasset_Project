@@ -56,7 +56,10 @@
     <Compile Include="Models\Action.cs">
       <DependentUpon>WassetPortalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Organization.cs">
+    <Compile Include="Models\Hospital.cs">
+      <DependentUpon>WassetPortalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hospitals_Packages.cs">
       <DependentUpon>WassetPortalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Patient.cs">
@@ -65,7 +68,16 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>WassetPortalDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SampleResult.cs">
+      <DependentUpon>WassetPortalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SampleStatu.cs">
+      <DependentUpon>WassetPortalDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>WassetPortalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Test.cs">
       <DependentUpon>WassetPortalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">

@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="WassetPortalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="WassetPortalDBEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="USP_InsertPatientInfo" />
     <EntitySet Name="Actions" EntityType="WassetPortalDBModel.Action" />
-    <EntitySet Name="Organizations" EntityType="WassetPortalDBModel.Organization" />
+    <EntitySet Name="Hospitals" EntityType="WassetPortalDBModel.Hospital" />
+    <EntitySet Name="Hospitals_Packages" EntityType="WassetPortalDBModel.Hospitals_Packages" />
+    <EntitySet Name="Patients" EntityType="WassetPortalDBModel.Patient" />
     <EntitySet Name="Roles" EntityType="WassetPortalDBModel.Role" />
+    <EntitySet Name="SampleResults" EntityType="WassetPortalDBModel.SampleResult" />
+    <EntitySet Name="SampleStatus" EntityType="WassetPortalDBModel.SampleStatu" />
     <EntitySet Name="sysdiagrams" EntityType="WassetPortalDBModel.sysdiagram" />
+    <EntitySet Name="Tests" EntityType="WassetPortalDBModel.Test" />
     <EntitySet Name="User_Role" EntityType="WassetPortalDBModel.User_Role" />
     <EntitySet Name="UserActions" EntityType="WassetPortalDBModel.UserAction" />
     <EntitySet Name="Users" EntityType="WassetPortalDBModel.User" />
@@ -12,9 +18,33 @@
       <End Role="Action" EntitySet="Actions" />
       <End Role="UserAction" EntitySet="UserActions" />
     </AssociationSet>
+    <AssociationSet Name="FK_Hospitals_Packages_Hospitals" Association="WassetPortalDBModel.FK_Hospitals_Packages_Hospitals">
+      <End Role="Hospital" EntitySet="Hospitals" />
+      <End Role="Hospitals_Packages" EntitySet="Hospitals_Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_Hospitals" Association="WassetPortalDBModel.FK_Patients_Hospitals">
+      <End Role="Hospital" EntitySet="Hospitals" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
     <AssociationSet Name="FK_Users_Organization" Association="WassetPortalDBModel.FK_Users_Organization">
-      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Hospital" EntitySet="Hospitals" />
       <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hospitals_Packages_Test" Association="WassetPortalDBModel.FK_Hospitals_Packages_Test">
+      <End Role="Test" EntitySet="Tests" />
+      <End Role="Hospitals_Packages" EntitySet="Hospitals_Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_Hospitals_Packages" Association="WassetPortalDBModel.FK_Patients_Hospitals_Packages">
+      <End Role="Hospitals_Packages" EntitySet="Hospitals_Packages" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_SampleResult" Association="WassetPortalDBModel.FK_Patients_SampleResult">
+      <End Role="SampleResult" EntitySet="SampleResults" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_SampleStatus" Association="WassetPortalDBModel.FK_Patients_SampleStatus">
+      <End Role="SampleStatu" EntitySet="SampleStatus" />
+      <End Role="Patient" EntitySet="Patients" />
     </AssociationSet>
     <AssociationSet Name="FK_User_Role_Roles" Association="WassetPortalDBModel.FK_User_Role_Roles">
       <End Role="Role" EntitySet="Roles" />
@@ -28,8 +58,6 @@
       <End Role="User" EntitySet="Users" />
       <End Role="UserAction" EntitySet="UserActions" />
     </AssociationSet>
-    <EntitySet Name="Patients" EntityType="WassetPortalDBModel.Patient" />
-    <FunctionImport Name="USP_InsertPatientInfo" />
   </EntityContainer>
   <EntityType Name="Action">
     <Key>
@@ -41,15 +69,57 @@
     <Property Name="ActionStatus" Type="Boolean" />
     <NavigationProperty Name="UserActions" Relationship="WassetPortalDBModel.FK_UserAction_Actions" FromRole="Action" ToRole="UserAction" />
   </EntityType>
-  <EntityType Name="Organization">
+  <EntityType Name="Hospital">
     <Key>
-      <PropertyRef Name="OrgID" />
+      <PropertyRef Name="HospitalID" />
     </Key>
-    <Property Name="OrgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrgName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="OrgAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="OrgStatus" Type="Boolean" />
-    <NavigationProperty Name="Users" Relationship="WassetPortalDBModel.FK_Users_Organization" FromRole="Organization" ToRole="User" />
+    <Property Name="HospitalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HospitalNameAr" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HospitalNameEn" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HospitalState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HospitalCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VatNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hospitals_Packages" Relationship="WassetPortalDBModel.FK_Hospitals_Packages_Hospitals" FromRole="Hospital" ToRole="Hospitals_Packages" />
+    <NavigationProperty Name="Patients" Relationship="WassetPortalDBModel.FK_Patients_Hospitals" FromRole="Hospital" ToRole="Patient" />
+    <NavigationProperty Name="Users" Relationship="WassetPortalDBModel.FK_Users_Organization" FromRole="Hospital" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Hospitals_Packages">
+    <Key>
+      <PropertyRef Name="Hospitals_PackagesID" />
+    </Key>
+    <Property Name="Hospitals_PackagesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_Hospital_ID" Type="Int32" />
+    <Property Name="Fk_Package_ID" Type="Int32" />
+    <Property Name="Hospital_Package_Status" Type="Boolean" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Hospital" Relationship="WassetPortalDBModel.FK_Hospitals_Packages_Hospitals" FromRole="Hospitals_Packages" ToRole="Hospital" />
+    <NavigationProperty Name="Test" Relationship="WassetPortalDBModel.FK_Hospitals_Packages_Test" FromRole="Hospitals_Packages" ToRole="Test" />
+    <NavigationProperty Name="Patients" Relationship="WassetPortalDBModel.FK_Patients_Hospitals_Packages" FromRole="Hospitals_Packages" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="PASSPORT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ID_IQAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NATIONALITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HESN_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="C_Case" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FK_Hospital_Package_ID" Type="Int32" />
+    <Property Name="Patient_Status" Type="Boolean" />
+    <Property Name="FK_Hospital_ID" Type="Int32" />
+    <Property Name="Fk_StatusID" Type="Int32" />
+    <Property Name="FK_Result" Type="Int32" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Hospital" Relationship="WassetPortalDBModel.FK_Patients_Hospitals" FromRole="Patient" ToRole="Hospital" />
+    <NavigationProperty Name="Hospitals_Packages" Relationship="WassetPortalDBModel.FK_Patients_Hospitals_Packages" FromRole="Patient" ToRole="Hospitals_Packages" />
+    <NavigationProperty Name="SampleResult" Relationship="WassetPortalDBModel.FK_Patients_SampleResult" FromRole="Patient" ToRole="SampleResult" />
+    <NavigationProperty Name="SampleStatu" Relationship="WassetPortalDBModel.FK_Patients_SampleStatus" FromRole="Patient" ToRole="SampleStatu" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -60,6 +130,24 @@
     <Property Name="RoleStatus" Type="Boolean" />
     <NavigationProperty Name="User_Role" Relationship="WassetPortalDBModel.FK_User_Role_Roles" FromRole="Role" ToRole="User_Role" />
   </EntityType>
+  <EntityType Name="SampleResult">
+    <Key>
+      <PropertyRef Name="SampleResultID" />
+    </Key>
+    <Property Name="SampleResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SampleResultName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Patients" Relationship="WassetPortalDBModel.FK_Patients_SampleResult" FromRole="SampleResult" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="SampleStatu">
+    <Key>
+      <PropertyRef Name="Sample_Status_ID" />
+    </Key>
+    <Property Name="Sample_Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SampleStatusName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Patients" Relationship="WassetPortalDBModel.FK_Patients_SampleStatus" FromRole="SampleStatu" ToRole="Patient" />
+  </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -69,6 +157,18 @@
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="TestID" />
+    </Key>
+    <Property Name="TestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TestNameEn" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TestNameAr" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TestPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TestCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Test_status" Type="Boolean" />
+    <NavigationProperty Name="Hospitals_Packages" Relationship="WassetPortalDBModel.FK_Hospitals_Packages_Test" FromRole="Test" ToRole="Hospitals_Packages" />
   </EntityType>
   <EntityType Name="User_Role">
     <Key>
@@ -104,10 +204,10 @@
     <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="UserStatus" Type="Boolean" />
     <Property Name="FK_OrgID" Type="Int32" />
-    <NavigationProperty Name="Organization" Relationship="WassetPortalDBModel.FK_Users_Organization" FromRole="User" ToRole="Organization" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hospital" Relationship="WassetPortalDBModel.FK_Users_Organization" FromRole="User" ToRole="Hospital" />
     <NavigationProperty Name="User_Role" Relationship="WassetPortalDBModel.FK_User_Role_Users" FromRole="User" ToRole="User_Role" />
     <NavigationProperty Name="UserActions" Relationship="WassetPortalDBModel.FK_UserAction_Users" FromRole="User" ToRole="UserAction" />
-    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_UserAction_Actions">
     <End Type="WassetPortalDBModel.Action" Role="Action" Multiplicity="0..1" />
@@ -121,15 +221,87 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Hospitals_Packages_Hospitals">
+    <End Type="WassetPortalDBModel.Hospital" Role="Hospital" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Hospitals_Packages" Role="Hospitals_Packages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="Hospitals_Packages">
+        <PropertyRef Name="Fk_Hospital_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_Hospitals">
+    <End Type="WassetPortalDBModel.Hospital" Role="Hospital" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="FK_Hospital_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Users_Organization">
-    <End Type="WassetPortalDBModel.Organization" Role="Organization" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Hospital" Role="Hospital" Multiplicity="0..1" />
     <End Type="WassetPortalDBModel.User" Role="User" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Organization">
-        <PropertyRef Name="OrgID" />
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="FK_OrgID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hospitals_Packages_Test">
+    <End Type="WassetPortalDBModel.Test" Role="Test" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Hospitals_Packages" Role="Hospitals_Packages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestID" />
+      </Principal>
+      <Dependent Role="Hospitals_Packages">
+        <PropertyRef Name="Fk_Package_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_Hospitals_Packages">
+    <End Type="WassetPortalDBModel.Hospitals_Packages" Role="Hospitals_Packages" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospitals_Packages">
+        <PropertyRef Name="Hospitals_PackagesID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="FK_Hospital_Package_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_SampleResult">
+    <End Type="WassetPortalDBModel.SampleResult" Role="SampleResult" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleResult">
+        <PropertyRef Name="SampleResultID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="FK_Result" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_SampleStatus">
+    <End Type="WassetPortalDBModel.SampleStatu" Role="SampleStatu" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleStatu">
+        <PropertyRef Name="Sample_Status_ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="Fk_StatusID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -169,19 +341,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Patient">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="PASSPORT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ID_IQAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NATIONALITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="MOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="HESN_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="C_Case" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-  </EntityType>
 </Schema>

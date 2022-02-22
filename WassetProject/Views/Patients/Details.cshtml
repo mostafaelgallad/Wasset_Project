@@ -1,0 +1,139 @@
+﻿@model WassetPortal_DAL.Models.Patient
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSPORT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSPORT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_IQAMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_IQAMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NATIONALITY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NATIONALITY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOBILE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOBILE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HESN_NO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HESN_NO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C_Case)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_Case)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hospital.HospitalNameAr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hospital.HospitalNameAr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hospitals_Packages.Hospitals_PackagesID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hospitals_Packages.Hospitals_PackagesID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleResult.SampleResultName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleResult.SampleResultName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleStatu.SampleStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleStatu.SampleStatusName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

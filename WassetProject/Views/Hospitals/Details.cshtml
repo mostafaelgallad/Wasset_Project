@@ -1,0 +1,59 @@
+﻿@model WassetPortal_DAL.Models.Hospital
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hospital</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HospitalNameAr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HospitalNameAr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HospitalNameEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HospitalNameEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HospitalState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HospitalState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HospitalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HospitalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VatNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VatNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.HospitalID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -9,20 +9,32 @@
     <Property Name="Description" Type="nvarchar" MaxLength="150" />
     <Property Name="ActionStatus" Type="bit" />
   </EntityType>
-  <EntityType Name="Organization">
+  <EntityType Name="Hospitals">
     <Key>
-      <PropertyRef Name="OrgID" />
+      <PropertyRef Name="HospitalID" />
     </Key>
-    <Property Name="OrgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OrgName" Type="nvarchar" MaxLength="100" />
-    <Property Name="OrgAddress" Type="nvarchar" MaxLength="500" />
-    <Property Name="OrgStatus" Type="bit" />
+    <Property Name="HospitalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HospitalNameAr" Type="nvarchar" MaxLength="500" />
+    <Property Name="HospitalNameEn" Type="nvarchar" MaxLength="500" />
+    <Property Name="HospitalState" Type="nvarchar" MaxLength="500" />
+    <Property Name="HospitalCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="VatNumber" Type="nvarchar" MaxLength="500" />
   </EntityType>
-  <EntityType Name="Patient">
+  <EntityType Name="Hospitals_Packages">
+    <Key>
+      <PropertyRef Name="Hospitals_PackagesID" />
+    </Key>
+    <Property Name="Hospitals_PackagesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fk_Hospital_ID" Type="int" />
+    <Property Name="Fk_Package_ID" Type="int" />
+    <Property Name="Hospital_Package_Status" Type="bit" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Patients">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="250" />
     <Property Name="PASSPORT" Type="nvarchar" MaxLength="30" />
     <Property Name="ID_IQAMA" Type="nvarchar" MaxLength="50" />
@@ -32,6 +44,12 @@
     <Property Name="MOBILE" Type="nvarchar" MaxLength="50" />
     <Property Name="HESN_NO" Type="nvarchar" MaxLength="50" />
     <Property Name="_Case" Type="nvarchar" MaxLength="10" />
+    <Property Name="FK_Hospital_Package_ID" Type="int" />
+    <Property Name="Patient_Status" Type="bit" />
+    <Property Name="FK_Hospital_ID" Type="int" />
+    <Property Name="Fk_StatusID" Type="int" />
+    <Property Name="FK_Result" Type="int" />
+    <Property Name="BirthDate" Type="date" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
@@ -40,6 +58,22 @@
     <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
     <Property Name="RoleStatus" Type="bit" />
+  </EntityType>
+  <EntityType Name="SampleResult">
+    <Key>
+      <PropertyRef Name="SampleResultID" />
+    </Key>
+    <Property Name="SampleResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SampleResultName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="SampleStatus">
+    <Key>
+      <PropertyRef Name="Sample_Status_ID" />
+    </Key>
+    <Property Name="Sample_Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SampleStatusName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -50,6 +84,17 @@
     <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="TestID" />
+    </Key>
+    <Property Name="TestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TestNameEn" Type="nvarchar" MaxLength="500" />
+    <Property Name="TestNameAr" Type="nvarchar" MaxLength="500" />
+    <Property Name="TestPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TestCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Test_status" Type="bit" />
   </EntityType>
   <EntityType Name="User_Role">
     <Key>
@@ -83,6 +128,78 @@
     <Property Name="FK_OrgID" Type="int" />
     <Property Name="Password" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <Association Name="FK_Hospitals_Packages_Hospitals">
+    <End Role="Hospitals" Type="Self.Hospitals" Multiplicity="0..1" />
+    <End Role="Hospitals_Packages" Type="Self.Hospitals_Packages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospitals">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="Hospitals_Packages">
+        <PropertyRef Name="Fk_Hospital_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hospitals_Packages_Test">
+    <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+    <End Role="Hospitals_Packages" Type="Self.Hospitals_Packages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestID" />
+      </Principal>
+      <Dependent Role="Hospitals_Packages">
+        <PropertyRef Name="Fk_Package_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_Hospitals">
+    <End Role="Hospitals" Type="Self.Hospitals" Multiplicity="0..1" />
+    <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospitals">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="Patients">
+        <PropertyRef Name="FK_Hospital_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_Hospitals_Packages">
+    <End Role="Hospitals_Packages" Type="Self.Hospitals_Packages" Multiplicity="0..1" />
+    <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospitals_Packages">
+        <PropertyRef Name="Hospitals_PackagesID" />
+      </Principal>
+      <Dependent Role="Patients">
+        <PropertyRef Name="FK_Hospital_Package_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_SampleResult">
+    <End Role="SampleResult" Type="Self.SampleResult" Multiplicity="0..1" />
+    <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleResult">
+        <PropertyRef Name="SampleResultID" />
+      </Principal>
+      <Dependent Role="Patients">
+        <PropertyRef Name="FK_Result" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_SampleStatus">
+    <End Role="SampleStatus" Type="Self.SampleStatus" Multiplicity="0..1" />
+    <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleStatus">
+        <PropertyRef Name="Sample_Status_ID" />
+      </Principal>
+      <Dependent Role="Patients">
+        <PropertyRef Name="Fk_StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_Role_Roles">
     <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
     <End Role="User_Role" Type="Self.User_Role" Multiplicity="*" />
@@ -132,11 +249,11 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Users_Organization">
-    <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+    <End Role="Hospitals" Type="Self.Hospitals" Multiplicity="0..1" />
     <End Role="Users" Type="Self.Users" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Organization">
-        <PropertyRef Name="OrgID" />
+      <Principal Role="Hospitals">
+        <PropertyRef Name="HospitalID" />
       </Principal>
       <Dependent Role="Users">
         <PropertyRef Name="FK_OrgID" />
@@ -146,13 +263,41 @@
   <Function Name="USP_InsertPatientInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="WassetPortalDBModelStoreContainer">
     <EntitySet Name="Actions" EntityType="Self.Actions" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hospitals" EntityType="Self.Hospitals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hospitals_Packages" EntityType="Self.Hospitals_Packages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SampleResult" EntityType="Self.SampleResult" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SampleStatus" EntityType="Self.SampleStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_Role" EntityType="Self.User_Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAction" EntityType="Self.UserAction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Hospitals_Packages_Hospitals" Association="Self.FK_Hospitals_Packages_Hospitals">
+      <End Role="Hospitals" EntitySet="Hospitals" />
+      <End Role="Hospitals_Packages" EntitySet="Hospitals_Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hospitals_Packages_Test" Association="Self.FK_Hospitals_Packages_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="Hospitals_Packages" EntitySet="Hospitals_Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_Hospitals" Association="Self.FK_Patients_Hospitals">
+      <End Role="Hospitals" EntitySet="Hospitals" />
+      <End Role="Patients" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_Hospitals_Packages" Association="Self.FK_Patients_Hospitals_Packages">
+      <End Role="Hospitals_Packages" EntitySet="Hospitals_Packages" />
+      <End Role="Patients" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_SampleResult" Association="Self.FK_Patients_SampleResult">
+      <End Role="SampleResult" EntitySet="SampleResult" />
+      <End Role="Patients" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_SampleStatus" Association="Self.FK_Patients_SampleStatus">
+      <End Role="SampleStatus" EntitySet="SampleStatus" />
+      <End Role="Patients" EntitySet="Patients" />
+    </AssociationSet>
     <AssociationSet Name="FK_User_Role_Roles" Association="Self.FK_User_Role_Roles">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="User_Role" EntitySet="User_Role" />
@@ -170,7 +315,7 @@
       <End Role="UserAction" EntitySet="UserAction" />
     </AssociationSet>
     <AssociationSet Name="FK_Users_Organization" Association="Self.FK_Users_Organization">
-      <End Role="Organization" EntitySet="Organization" />
+      <End Role="Hospitals" EntitySet="Hospitals" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
   </EntityContainer>

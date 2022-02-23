@@ -1,111 +1,127 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WassetPortal_DAL.Models;
-using WassetPortal_DAL.Repositories;
 
 namespace WassetPortal.Controllers
 {
     public class RolesController : Controller
     {
-        private readonly UserRepository _userRepository;
-        public RolesController()
-        {
-            _userRepository = new UserRepository();
-        }
+        private WassetPortalDBEntities db = new WassetPortalDBEntities();
+
         // GET: Roles
         public ActionResult Index()
         {
-            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
-            //{
-            try
-            {
-                var roles = _userRepository.GetRolesList();
-                return View("Index", roles);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            //  }
-            //  return RedirectToAction("LogIn", "login", new { area = "" });
-           
+            return View(db.Roles.ToList());
         }
 
         // GET: Roles/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Role role = db.Roles.Find(id);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
         }
 
         // GET: Roles/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
         // POST: Roles/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "RoleID,RoleName,RoleStatus")] Role role)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.Roles.Add(role);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(role);
         }
 
         // GET: Roles/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Role role = db.Roles.Find(id);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
         }
 
         // POST: Roles/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, Role role)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "RoleID,RoleName,RoleStatus")] Role role)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(role).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(role);
         }
 
         // GET: Roles/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Role role = db.Roles.Find(id);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
         }
 
         // POST: Roles/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Role role = db.Roles.Find(id);
+            db.Roles.Remove(role);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

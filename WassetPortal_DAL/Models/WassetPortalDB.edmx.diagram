@@ -5,19 +5,29 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="75bd1d35c41146a0ae65103d3fb0876f" Name="Diagram1">
-        <EntityTypeShape EntityType="WassetPortalDBModel.Action" Width="1.5" PointX="3" PointY="10.875" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.Organization" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.Role" Width="1.5" PointX="3" PointY="7.375" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.User_Role" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.UserAction" Width="1.5" PointX="5.25" PointY="3.75" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.User" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Action" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Hospital" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Hospitals_Packages" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Patient" Width="1.5" PointX="8.25" PointY="3.875" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Role" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.SampleResult" Width="1.5" PointX="6" PointY="3.125" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.SampleStatu" Width="1.5" PointX="6" PointY="12.625" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Test" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.User_Role" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.UserAction" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.User" Width="1.5" PointX="3" PointY="8.375" />
         <AssociationConnector Association="WassetPortalDBModel.FK_UserAction_Actions" />
+        <AssociationConnector Association="WassetPortalDBModel.FK_Hospitals_Packages_Hospitals" />
+        <AssociationConnector Association="WassetPortalDBModel.FK_Patients_Hospitals" />
         <AssociationConnector Association="WassetPortalDBModel.FK_Users_Organization" />
+        <AssociationConnector Association="WassetPortalDBModel.FK_Hospitals_Packages_Test" />
+        <AssociationConnector Association="WassetPortalDBModel.FK_Patients_Hospitals_Packages" />
+        <AssociationConnector Association="WassetPortalDBModel.FK_Patients_SampleResult" />
+        <AssociationConnector Association="WassetPortalDBModel.FK_Patients_SampleStatus" />
         <AssociationConnector Association="WassetPortalDBModel.FK_User_Role_Roles" />
         <AssociationConnector Association="WassetPortalDBModel.FK_User_Role_Users" />
         <AssociationConnector Association="WassetPortalDBModel.FK_UserAction_Users" />
-        <EntityTypeShape EntityType="WassetPortalDBModel.Patient" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

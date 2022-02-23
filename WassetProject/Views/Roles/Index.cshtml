@@ -1,64 +1,40 @@
 ﻿@model IEnumerable<WassetPortal_DAL.Models.Role>
 
 @{
-    ViewBag.Title = "RolesIndex";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>RolesIndex</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateRole")
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleStatus)
+        </th>
+        <th></th>
+    </tr>
 
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Roles</h4>
-            <p class="card-description">
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RoleID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RoleID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RoleID })
+        </td>
+    </tr>
+}
 
-            </p>
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.RoleName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.RoleStatus)
-                            </th>
-                            <th>
-
-                            </th>
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{ if (Model != null)
-                            {
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.RoleName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.RoleStatus)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.RoleID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.RoleID }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.RoleID })
-                                        </td>
-
-                                    </tr>
-                                }
-                            }
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+</table>

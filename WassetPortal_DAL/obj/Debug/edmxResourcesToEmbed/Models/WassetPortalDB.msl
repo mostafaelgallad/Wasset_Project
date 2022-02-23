@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="WassetPortalDBModelStoreContainer" CdmEntityContainer="WassetPortalDBEntities">
+    <FunctionImportMapping FunctionImportName="USP_InsertPatientInfo" FunctionName="WassetPortalDBModel.Store.USP_InsertPatientInfo" />
     <EntitySetMapping Name="Actions">
       <EntityTypeMapping TypeName="WassetPortalDBModel.Action">
         <MappingFragment StoreEntitySet="Actions">
@@ -11,13 +12,48 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Organizations">
-      <EntityTypeMapping TypeName="WassetPortalDBModel.Organization">
-        <MappingFragment StoreEntitySet="Organization">
-          <ScalarProperty Name="OrgStatus" ColumnName="OrgStatus" />
-          <ScalarProperty Name="OrgAddress" ColumnName="OrgAddress" />
-          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
-          <ScalarProperty Name="OrgID" ColumnName="OrgID" />
+    <EntitySetMapping Name="Hospitals">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.Hospital">
+        <MappingFragment StoreEntitySet="Hospitals">
+          <ScalarProperty Name="VatNumber" ColumnName="VatNumber" />
+          <ScalarProperty Name="HospitalCode" ColumnName="HospitalCode" />
+          <ScalarProperty Name="HospitalState" ColumnName="HospitalState" />
+          <ScalarProperty Name="HospitalNameEn" ColumnName="HospitalNameEn" />
+          <ScalarProperty Name="HospitalNameAr" ColumnName="HospitalNameAr" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hospitals_Packages">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.Hospitals_Packages">
+        <MappingFragment StoreEntitySet="Hospitals_Packages">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Hospital_Package_Status" ColumnName="Hospital_Package_Status" />
+          <ScalarProperty Name="Fk_Package_ID" ColumnName="Fk_Package_ID" />
+          <ScalarProperty Name="Fk_Hospital_ID" ColumnName="Fk_Hospital_ID" />
+          <ScalarProperty Name="Hospitals_PackagesID" ColumnName="Hospitals_PackagesID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.Patient">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="FK_Result" ColumnName="FK_Result" />
+          <ScalarProperty Name="Fk_StatusID" ColumnName="Fk_StatusID" />
+          <ScalarProperty Name="FK_Hospital_ID" ColumnName="FK_Hospital_ID" />
+          <ScalarProperty Name="Patient_Status" ColumnName="Patient_Status" />
+          <ScalarProperty Name="FK_Hospital_Package_ID" ColumnName="FK_Hospital_Package_ID" />
+          <ScalarProperty Name="C_Case" ColumnName="_Case" />
+          <ScalarProperty Name="HESN_NO" ColumnName="HESN_NO" />
+          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+          <ScalarProperty Name="ID_IQAMA" ColumnName="ID_IQAMA" />
+          <ScalarProperty Name="PASSPORT" ColumnName="PASSPORT" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -30,6 +66,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SampleResults">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.SampleResult">
+        <MappingFragment StoreEntitySet="SampleResult">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SampleResultName" ColumnName="SampleResultName" />
+          <ScalarProperty Name="SampleResultID" ColumnName="SampleResultID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SampleStatus">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.SampleStatu">
+        <MappingFragment StoreEntitySet="SampleStatus">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SampleStatusName" ColumnName="SampleStatusName" />
+          <ScalarProperty Name="Sample_Status_ID" ColumnName="Sample_Status_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="WassetPortalDBModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -38,6 +92,18 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
           <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tests">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.Test">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="Test_status" ColumnName="Test_status" />
+          <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+          <ScalarProperty Name="TestPrice" ColumnName="TestPrice" />
+          <ScalarProperty Name="TestNameAr" ColumnName="TestNameAr" />
+          <ScalarProperty Name="TestNameEn" ColumnName="TestNameEn" />
+          <ScalarProperty Name="TestID" ColumnName="TestID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -76,22 +142,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Patients">
-      <EntityTypeMapping TypeName="WassetPortalDBModel.Patient">
-        <MappingFragment StoreEntitySet="Patient">
-          <ScalarProperty Name="C_Case" ColumnName="_Case" />
-          <ScalarProperty Name="HESN_NO" ColumnName="HESN_NO" />
-          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
-          <ScalarProperty Name="ID_IQAMA" ColumnName="ID_IQAMA" />
-          <ScalarProperty Name="PASSPORT" ColumnName="PASSPORT" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="USP_InsertPatientInfo" FunctionName="WassetPortalDBModel.Store.USP_InsertPatientInfo" />
   </EntityContainerMapping>
 </Mapping>

@@ -134,7 +134,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalsController.cs" />
+    <Compile Include="Controllers\Hospitals_PackagesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OperationsController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
@@ -1978,6 +1980,12 @@
     <Content Include="Views\Roles\Details.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Hospitals_Packages\Create.cshtml" />
+    <Content Include="Views\Hospitals_Packages\Delete.cshtml" />
+    <Content Include="Views\Hospitals_Packages\Details.cshtml" />
+    <Content Include="Views\Hospitals_Packages\Edit.cshtml" />
+    <Content Include="Views\Hospitals_Packages\Index.cshtml" />
+    <Content Include="Views\Operations\Index.cshtml" />
     <None Include="wwwroot\projectContent\Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="wwwroot\projectContent\Scripts\jquery-3.4.1.js" />
     <Content Include="wwwroot\projectContent\Scripts\jquery-3.4.1.min.js" />

@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*hospitals*@
+<div class="row">
+    <div class="form-group">
+        @Html.Label("", "Fk_Package_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Fk_Hospital_ID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessage("", "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+@*Tests*@
+<div class="row">
+    <label>Select Tests</label>
+    <div class="form-group">
+        <table class="table table-sm">
+            <tr>
+                <td>Covid-19 Within 24 hours</td>
+                <td>Normal</td>
+                <td>60 SAR</td>
+                <td><button class="btn btn-danger">Add Test</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <button class="btn btn-danger">Remove All</button>
+        </div>
+        <div class="form-group col-md-2">
+            <button class="btn btn-danger">Add Patient</button>
+        </div>
+        <div class="form-group col-md-2">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Import Excel
+            </button>
+        </div>
+    </div>
+    <table class="table col-md-6" id="PatientsTable">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">PASSPORT</th>
+                <th scope="col">ID_IQAMA</th>
+                <th scope="col">NATIONALITY</th>
+                <th scope="col">Gender</th>
+                <th scope="col">DOB</th>
+                <th scope="col">MOBILE</th>
+                <th scope="col">HESN_NO</th>
+                <th scope="col">_Case</th>
+            </tr>
+        </thead>
+        <tbody id="previewTable">
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inpt_ExcelFile">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Template</button>
+                <button type="button" class="btn btn-success" id="uploadExcel">Import</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button class="btn btn-danger">Continue</button>
+@section scripts{
+
+    <script>
+        $("#PatientsTable").DataTable()
+        $("#uploadExcel").on('click', function () {
+            let file = $("#inpt_ExcelFile").get(0)
+            let form = new FormData();
+            form.append("file", file.files[0])
+            $.ajax({
+                url: '/Operations/UploadFile',
+                type: 'Post',
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res !== "failed") {
+                        $.ajax({
+                            url: '/Operations/RenderExcelData?fileName=' + res,
+                            type: 'Post',
+                            processData: false,
+                            contentType: false,
+                            success: function (res) {
+                                alert("mm")
+                                let insertedData = JSON.parse(res.Result)
+                                let row = ""
+                                insertedData?.map(item => {
+                                    row += `<tr>
+                                                    <td>${item.Name}</td>
+                                                    <td>${item.PASSPORT}</td>
+                                                    <td>${item.ID_IQAMA}</td>
+                                                    <td>${item.NATIONALITY}</td>
+                                                    <td>${item.GENDER}</td>
+                                                    <td>${item.DOB}</td>
+                                                    <td>${item.MOBILE}</td>
+                                                    <td>${item.HESN_NO ?? ""}</td>
+                                                    <td>${item._CASE}</td>
+                                                </tr>`
+                                })
+                                $("#PatientsTable").DataTable().clear().destroy();
+                                $("#previewTable").html("")
+                                $("#previewTable").html(row)
+                                $('#PatientsTable').DataTable()
+                                $("#exampleModal").modal('hide')
+                            },
+                            error: function (err) {
+
+                            }
+                        })
+                    }
+                },
+                error: function (err) {
+
+                }
+            })
+        })
+    </script>
+}

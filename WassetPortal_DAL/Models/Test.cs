@@ -33,8 +33,6 @@ public partial class Test
 
     public string TestNameAr { get; set; }
 
-    public Nullable<decimal> TestPrice { get; set; }
-
     public string TestCode { get; set; }
 
     public Nullable<bool> Test_status { get; set; }

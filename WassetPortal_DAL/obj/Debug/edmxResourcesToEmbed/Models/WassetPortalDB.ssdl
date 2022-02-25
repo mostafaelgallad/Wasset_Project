@@ -92,7 +92,6 @@
     <Property Name="TestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TestNameEn" Type="nvarchar" MaxLength="500" />
     <Property Name="TestNameAr" Type="nvarchar" MaxLength="500" />
-    <Property Name="TestPrice" Type="decimal" Precision="18" Scale="0" />
     <Property Name="TestCode" Type="nvarchar" MaxLength="100" />
     <Property Name="Test_status" Type="bit" />
   </EntityType>

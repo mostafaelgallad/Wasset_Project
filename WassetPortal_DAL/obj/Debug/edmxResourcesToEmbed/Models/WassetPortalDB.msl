@@ -100,7 +100,6 @@
         <MappingFragment StoreEntitySet="Test">
           <ScalarProperty Name="Test_status" ColumnName="Test_status" />
           <ScalarProperty Name="TestCode" ColumnName="TestCode" />
-          <ScalarProperty Name="TestPrice" ColumnName="TestPrice" />
           <ScalarProperty Name="TestNameAr" ColumnName="TestNameAr" />
           <ScalarProperty Name="TestNameEn" ColumnName="TestNameEn" />
           <ScalarProperty Name="TestID" ColumnName="TestID" />

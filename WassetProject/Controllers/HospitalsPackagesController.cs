@@ -10,18 +10,18 @@ using WassetPortal_DAL.Models;
 
 namespace WassetPortal.Controllers
 {
-    public class Hospitals_PackagesController : Controller
+    public class HospitalsPackagesController : Controller
     {
         private WassetPortalDBEntities db = new WassetPortalDBEntities();
 
-        // GET: Hospitals_Packages
+        // GET: HospitalsPackages
         public ActionResult Index()
         {
             var hospitals_Packages = db.Hospitals_Packages.Include(h => h.Hospital).Include(h => h.Test);
             return View(hospitals_Packages.ToList());
         }
 
-        // GET: Hospitals_Packages/Details/5
+        // GET: HospitalsPackages/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace WassetPortal.Controllers
             return View(hospitals_Packages);
         }
 
-        // GET: Hospitals_Packages/Create
+        // GET: HospitalsPackages/Create
         public ActionResult Create()
         {
             ViewBag.Fk_Hospital_ID = new SelectList(db.Hospitals, "HospitalID", "HospitalNameAr");
@@ -44,7 +44,7 @@ namespace WassetPortal.Controllers
             return View();
         }
 
-        // POST: Hospitals_Packages/Create
+        // POST: HospitalsPackages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -63,7 +63,7 @@ namespace WassetPortal.Controllers
             return View(hospitals_Packages);
         }
 
-        // GET: Hospitals_Packages/Edit/5
+        // GET: HospitalsPackages/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace WassetPortal.Controllers
             return View(hospitals_Packages);
         }
 
-        // POST: Hospitals_Packages/Edit/5
+        // POST: HospitalsPackages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -98,7 +98,7 @@ namespace WassetPortal.Controllers
             return View(hospitals_Packages);
         }
 
-        // GET: Hospitals_Packages/Delete/5
+        // GET: HospitalsPackages/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +113,7 @@ namespace WassetPortal.Controllers
             return View(hospitals_Packages);
         }
 
-        // POST: Hospitals_Packages/Delete/5
+        // POST: HospitalsPackages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

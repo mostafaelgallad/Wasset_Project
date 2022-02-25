@@ -165,7 +165,6 @@
     <Property Name="TestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TestNameEn" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="TestNameAr" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="TestPrice" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="TestCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Test_status" Type="Boolean" />
     <NavigationProperty Name="Hospitals_Packages" Relationship="WassetPortalDBModel.FK_Hospitals_Packages_Test" FromRole="Test" ToRole="Hospitals_Packages" />

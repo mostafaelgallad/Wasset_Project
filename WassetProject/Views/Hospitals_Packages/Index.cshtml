@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WassetPortal_DAL.Models.Hospitals_Packages>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hospital_Package_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hospital.HospitalNameAr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Test.TestNameEn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hospital_Package_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hospital.HospitalNameAr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Test.TestNameEn)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Hospitals_PackagesID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Hospitals_PackagesID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Hospitals_PackagesID })
+        </td>
+    </tr>
+}
+
+</table>

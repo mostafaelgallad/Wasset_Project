@@ -137,6 +137,21 @@ namespace WassetPortal.Controllers
                 return dt;
             }
         }
+
+        public ActionResult RenderExcelData(string fileName)
+        {
+            var dt = ReadExcelFile(Server.MapPath("~/Uploads/") + fileName);
+            if(dt != null)
+            {
+                return Json(new { Result = JsonConvert.SerializeObject(dt), success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new {success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         [HttpPost]
         public ActionResult InsertExcelData (string path)
         {

@@ -113,16 +113,40 @@ namespace WassetPortal.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpGet]
+        public ActionResult GetHospitalPackages(int? hospitalID)
+        {
+            if (hospitalID != null)
+            {
+                var res = db.Hospitals_Packages.FirstOrDefault(h => h.Fk_Hospital_ID == hospitalID &&
+                h.Hospital_Package_Status == true);
+
+                return Json(new { res.Test.TestNameEn, ID = res.Hospitals_PackagesID, res.Price, success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public FileResult DownloadTemplate()
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/Uploads/Template/Template.xlsx"));
+            string fileName = "Template.xlsx";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
 
         [HttpPost]
-        public ActionResult InsertExcelData(string Patients, int? testsIDs)
+        public ActionResult CreateOrder(List<Patient> Patients)
         {
-
-            //var commandText = "exec USP_InsertPatientInfo @PatientsInfo";
-            //var name = new SqlParameter("@PatientsInfo", dt);
-            //name.TypeName = "dbo.PatientInfo";
-            //db.Database.ExecuteSqlCommand(commandText, name);
-            //string table = JsonConvert.SerializeObject(dt);
+            if (Patients != null && Patients.Count > 0)
+            {
+                foreach (var patient in Patients)
+                {
+                    db.Patients.Add(patient);
+                }
+                db.SaveChanges();
+            }
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 

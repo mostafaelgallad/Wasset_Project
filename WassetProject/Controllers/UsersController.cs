@@ -115,7 +115,9 @@ namespace WassetPortal.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            user.UserStatus = false;
+            db.Entry(user).State = EntityState.Modified;
+            // db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
